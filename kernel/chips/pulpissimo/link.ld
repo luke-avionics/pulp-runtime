@@ -153,7 +153,7 @@ SECTIONS
   } > L2
 
 
-  .bss : {
+  .bss MIN(0x1c020000,ALIGN(4)) : {
     . = ALIGN(8);
     _bss_start = .;
     *(.bss)
@@ -177,13 +177,13 @@ SECTIONS
    * Contains FC code
    */
 
-  .vectors MAX(0x1c008000,ALIGN(256)) :
+  .vectors MAX(0x1c020000,ALIGN(256)) :
   {
     __irq_vector_base = .;
     KEEP(*(.vectors))
   } > L2
 
-  .text :
+  .text MIN(0x1c040000,ALIGN(4)):
   {
     . = ALIGN(4);
     _stext = .;
@@ -205,7 +205,7 @@ SECTIONS
    * Contains other data such as peripheral data and cluster code and data
    */
 
-  .l2_data MAX(0x1c010000,ALIGN(4)) :
+  .l2_data MAX(0x1c040000,ALIGN(4)) :
   {
     . = ALIGN(4);
     __cluster_text_start = .;
